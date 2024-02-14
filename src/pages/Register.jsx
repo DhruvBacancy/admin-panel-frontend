@@ -131,6 +131,29 @@ const Register = () => {
             </div>
           </div>
           <div className='flex place-content-center'>
+            {/* <div className='w-5/12'>
+              <label
+                htmlFor='role'
+                className='block text-sm font-medium leading-6 text-gray-900 mt-5'
+              >
+                Role*
+              </label>
+              <div className='relative mt-2 rounded-md shadow-sm'>
+                <select
+                  type='password'
+                  name='confirmPassword'
+                  id='confirmPassword'
+                  className='block w-full rounded-md border-0 py-1.5 pl-1.5 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+                  placeholder='Confirm Password'
+                  {...register("role")}
+                >
+                  <option value='admin' className="block w-full rounded-md border-0 py-1.5 pl-1.5 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">Admin</option>
+                  <option value='user'>User</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div className='flex place-content-center'> */}
             <div className='w-5/12'>
               <button className='bg-indigo-500 w-full text-center rounded-md border-0 mt-5 py-1.5 pl-1.5 text-white'>
                 Register

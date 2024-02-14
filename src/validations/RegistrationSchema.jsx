@@ -21,4 +21,5 @@ export const registrationSchema = Yup.object().shape({
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Confirm Password is required"),
+    // role: Yup.string().required()
 })
