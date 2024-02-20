@@ -25,9 +25,9 @@ const Header = () => {
             </button>
 
             {/* User Profile */}
-            <div className='flex items-center'>
+            {/* <div className='flex items-center'>
               <span>Admin Name</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

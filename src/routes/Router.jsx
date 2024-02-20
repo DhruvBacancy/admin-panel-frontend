@@ -4,8 +4,9 @@ import Register from "../pages/Register"
 import SignIn from "../pages/SignIn"
 import Home from "../pages/Home"
 import Header from "../components/Header"
+import EditUser from "../pages/EditUser"
 
-const Router = () => {
+const Router = ({ userData, updateUser }) => {
   return (
     <div>
       <Header />
@@ -13,6 +14,7 @@ const Router = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/' element={<Home />} />
+        <Route path='/edit/:id' element={<EditUser />} />
       </Routes>
     </div>
   )
