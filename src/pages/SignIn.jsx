@@ -34,7 +34,7 @@ const SignIn = () => {
             <div className='w-5/12'>
               <label
                 htmlFor='email'
-                className='block text-sm font-medium leading-6 text-gray-900 mt-72'
+                className='block text-sm font-medium leading-6 text-gray-900 mt-52'
               >
                 Email*
               </label>

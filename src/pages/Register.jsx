@@ -21,7 +21,7 @@ const Register = () => {
             <div className='w-1/5 mr-3.5'>
               <label
                 htmlFor='firstName'
-                className='block text-sm font-medium leading-6 text-gray-900 mt-52'
+                className='block text-sm font-medium leading-6 text-gray-900 mt-44'
               >
                 First Name*
               </label>
@@ -42,7 +42,7 @@ const Register = () => {
             <div className='w-1/5 ml-3.5'>
               <label
                 htmlFor='lastName'
-                className='block text-sm font-medium leading-6 text-gray-900 mt-52'
+                className='block text-sm font-medium leading-6 text-gray-900 mt-44'
               >
                 Last Name
               </label>
