@@ -2,25 +2,32 @@ import React from "react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { loginSchema } from "../validations/SignInSchema"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { userLogin } from "../api/auth/authApiHandler"
 import { useMutation } from "@tanstack/react-query"
+import { AuthContextExport } from "../util/context/AuthContext"
 
 const SignIn = () => {
+  const { login } = AuthContextExport()
   const formOptions = { resolver: yupResolver(loginSchema) }
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm(formOptions)
+  const navigate = useNavigate()
 
   const mutation = useMutation({ mutationFn: userLogin })
 
   const onSubmit = async (formData) => {
     await mutation
       .mutateAsync(formData)
-      .then((response) => {
-        console.log(response.data)
+      .then((res) => {
+        if (res.data.data.token) {
+          localStorage.setItem("token", res.data?.data?.token || "")
+          login(res.data?.data?.token, res.data?.data?.role)
+        }
+        navigate("/")
       })
       .catch((error) => {
         console.log(error.message)

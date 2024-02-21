@@ -1,8 +1,10 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
+import { AuthContextExport } from "../util/context/AuthContext"
 
 const Header = () => {
   const navigate = useNavigate()
+  const { token } = AuthContextExport()
   return (
     <div>
       <div className='flex w-full h-24 bg-indigo-500 text-white'>
@@ -20,9 +22,22 @@ const Header = () => {
             <button onClick={() => navigate("/")} className='mr-4'>
               Home
             </button>
-            <button onClick={() => navigate("/logout")} className='mr-4'>
-              Logout
-            </button>
+            {!token ? (
+              <>
+                <button onClick={() => navigate("/register")} className='mr-4'>
+                  Register
+                </button>
+                <button onClick={() => navigate("/signin")} className='mr-4'>
+                  Sign In
+                </button>
+              </>
+            ) : (
+              <>
+                <button onClick={() => navigate("/logout")} className='mr-4'>
+                  Logout
+                </button>
+              </>
+            )}
 
             {/* User Profile */}
             {/* <div className='flex items-center'>

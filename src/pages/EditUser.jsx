@@ -41,7 +41,7 @@ const EditUser = () => {
   }
 
   return (
-    <div className='flex justify-center items-center h-full'>
+    <div className='flex justify-center items-center h-full mt-4'>
       <div className='w-full max-w-md'>
         <h1 className='text-2xl font-bold mb-4 text-center'>Edit User</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
