@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
 import Register from "../pages/Register"
 import SignIn from "../pages/SignIn"
@@ -8,7 +8,13 @@ import EditUser from "../pages/EditUser"
 import { AuthContextExport } from "../util/context/AuthContext"
 
 const Router = () => {
-  const { token } = AuthContextExport()
+  const { login } = AuthContextExport()
+  const token = localStorage.getItem("token")
+  useEffect(() => {
+    if (token) {
+      login(token)
+    }
+  }, [])
   return (
     <div>
       <Header />
