@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useAtom } from "jotai"
-import { userDataAtom } from "../userDataAtom"
+import { userDataAtom } from "../util/jotai/userDataAtom"
 // import { updateUser } from "../api"; // You need to implement this function to update the user data
 
 const EditUser = () => {
