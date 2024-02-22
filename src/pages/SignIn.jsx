@@ -6,9 +6,6 @@ import { Link, useNavigate } from "react-router-dom"
 import { userLogin } from "../api/auth/authApiHandler"
 import { useMutation } from "@tanstack/react-query"
 import { AuthContextExport } from "../util/context/AuthContext"
-import { userDataAtom } from "../util/jotai/userDataAtom"
-import { getUserData } from "../api/user/userApi"
-import { useAtom } from "jotai"
 
 const SignIn = () => {
   const { login } = AuthContextExport()
@@ -22,8 +19,6 @@ const SignIn = () => {
 
   const mutation = useMutation({ mutationFn: userLogin })
 
-  const [userData, setUserData] = useAtom(userDataAtom)
-
   const onSubmit = async (formData) => {
     await mutation
       .mutateAsync(formData)
@@ -31,12 +26,8 @@ const SignIn = () => {
         if (res.data.data.token) {
           localStorage.setItem("token", res.data?.data?.token || "")
           login(res.data?.data?.token, res.data?.data?.role)
+          navigate("/")
         }
-        await getUserData().then((res) => {
-          console.log(res.data?.allUsers)
-          setUserData(res.data?.data?.allUsers)
-        })
-        navigate("/")
       })
       .catch((error) => {
         console.log(error.message)

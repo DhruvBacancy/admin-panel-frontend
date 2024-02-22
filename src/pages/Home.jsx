@@ -1,12 +1,22 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useAtom } from "jotai"
 import { userDataAtom } from "../util/jotai/userDataAtom"
 import { useNavigate } from "react-router-dom"
 import { useGlobalFilter, useSortBy, useTable } from "react-table"
+import { deleteUser, getUserData } from "../api/user/userApi"
+import { AuthContextExport } from "../util/context/AuthContext"
 
 const Home = () => {
   const [userData, setUserData] = useAtom(userDataAtom)
   const navigate = useNavigate()
+
+  const { token } = AuthContextExport()
+
+  useEffect(() => {
+    getUserData().then((res) => {
+      setUserData(res.data?.data?.allUsers)
+    })
+  }, [])
 
   const GlobalFilter = ({ filter, setFilter }) => {
     return (
@@ -59,9 +69,14 @@ const Home = () => {
       setUserIdToDelete(userId)
     }
 
-    const confirmDelete = () => {
-      console.log("Deleting user with ID:", userIdToDelete)
-      setShowConfirmation(false)
+    const confirmDelete = async () => {
+      deleteUser(userIdToDelete).then(() => {
+        const deletedUser = userData.filter(
+          (user) => user.id !== userIdToDelete
+        )
+        setUserData(deletedUser)
+        setShowConfirmation(false)
+      })
     }
 
     const cancelDelete = () => {
@@ -184,10 +199,25 @@ const Home = () => {
   ]
 
   return (
-    <div className='p-4'>
-      <h1 className='text-xl font-bold mb-4'>User List</h1>
-      <UsersTable columns={columns} data={userData} />
-    </div>
+    <>
+      {!token ? (
+        <>
+          <div className='flex flex-col items-center justify-center mt-48'>
+            <h1 className='text-4xl font-bold text-green-600 mb-4'>Welcome!</h1>
+            <p className='text-lg text-gray-800'>
+              Please login or signup to continue.
+            </p>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className='p-4'>
+            <h1 className='text-xl font-bold mb-4'>User List</h1>
+            <UsersTable columns={columns} data={userData} />
+          </div>
+        </>
+      )}
+    </>
   )
 }
 

@@ -97,13 +97,15 @@ const EditUser = () => {
             <label htmlFor='role' className='block'>
               Role
             </label>
-            <input
-              type='text'
+            <select
               id='role'
               name='role'
               className='px-4 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring focus:ring-blue-200'
               {...register("role")}
-            />
+            >
+              <option value='admin'>Admin</option>
+              <option value='user'>User</option>
+            </select>
           </div>
           <div className='flex justify-center mt-6'>
             <button

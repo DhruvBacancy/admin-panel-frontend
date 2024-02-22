@@ -21,6 +21,7 @@ const Router = () => {
     <div>
       <Header />
       <Routes>
+        <Route path='/' element={<Home />} />
         {!token ? (
           <>
             <Route path='/register' element={<Register />} />
@@ -28,7 +29,6 @@ const Router = () => {
           </>
         ) : (
           <>
-            <Route path='/' element={<Home />} />
             <Route path='/edit/:id' element={<EditUser />} />
             <Route path='/logout' element={<Logout />} />
           </>
