@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import { registrationSchema } from "../validations/RegistrationSchema"
 import { useForm } from "react-hook-form"

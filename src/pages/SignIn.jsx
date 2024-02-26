@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { loginSchema } from "../validations/SignInSchema"
@@ -19,7 +19,10 @@ const SignIn = () => {
 
   const mutation = useMutation({ mutationFn: userLogin })
 
+  const [errorMessage, setErrorMessage] = useState("")
+
   const onSubmit = async (formData) => {
+    setErrorMessage("")
     await mutation
       .mutateAsync(formData)
       .then(async (res) => {
@@ -30,18 +33,32 @@ const SignIn = () => {
         }
       })
       .catch((error) => {
-        console.log(error.message)
+        if (error.response && error.response.status === 401) {
+          if (
+            error.response.data &&
+            error.response.data.errorMessage === "Invalid credentials"
+          ) {
+            setErrorMessage("Invalid email or password")
+          }
+        } else {
+          console.log(error.message)
+        }
       })
   }
   return (
     <>
-      <div>
+      <div className='mt-52'>
+        {errorMessage && (
+          <div className='text-red-600 text-center mb-4 font-bold text-lg'>
+            {errorMessage}
+          </div>
+        )}
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='flex place-content-center w-full'>
             <div className='w-5/12'>
               <label
                 htmlFor='email'
-                className='block text-sm font-medium leading-6 text-gray-900 mt-52'
+                className='block text-sm font-medium leading-6 text-gray-900'
               >
                 Email*
               </label>
